@@ -1,0 +1,17 @@
+type OrderNotification {
+    id: ID!
+    message: String!
+    status: String!
+    lockerLocation: String!
+}
+
+type Query {
+    getNotification(id: ID!): OrderNotification
+    getAllNotifications: [OrderNotification!]!
+}
+
+type Mutation {
+    createNotification(message: String!, status: String!, lockerLocation: String!): OrderNotification!
+    deleteNotification(id: ID!): Boolean!
+    updateNotification(id: ID!, message: String, status: String, lockerLocation: String): OrderNotification!  # Добавлена мутация
+}
