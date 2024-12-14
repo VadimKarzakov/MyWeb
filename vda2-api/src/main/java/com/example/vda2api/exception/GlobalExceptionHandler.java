@@ -1,4 +1,4 @@
-package com.example.vda2.api.exception;
+package com.example.vda2api.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

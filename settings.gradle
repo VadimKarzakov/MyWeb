@@ -1,1 +1,3 @@
 rootProject.name = 'vda2'
+include ':vda2-api'
+include ':vda2'

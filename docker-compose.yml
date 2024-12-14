@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: Nas
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres_network
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_broker
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "15672:15672" # management UI
+      - "5672:5672"   # AMQP port
+    networks:
+      - postgres_network
+
+  app:
+    build:
+      context: ../../s
+      dockerfile: Dockerfile
+    container_name: vda2
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_APPLICATION_NAME: vda2
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/Nas
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: 12345
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SERVER_PORT: 8081
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      QUEUE_NAME: notificationsQueue
+      SPRING_SPRINGDOC_SWAGGER_UI_PATH: /swagger-ui
+    depends_on:
+      - postgres
+      - rabbitmq
+    restart: always
+    networks:
+      - postgres_network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres_network:
+    driver: bridge

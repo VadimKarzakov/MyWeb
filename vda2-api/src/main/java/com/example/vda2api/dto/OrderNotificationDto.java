@@ -1,4 +1,4 @@
-package com.example.vda2.api.dto;
+package com.example.vda2api.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

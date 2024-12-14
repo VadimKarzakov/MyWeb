@@ -13,6 +13,7 @@ java {
     }
 }
 
+
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
@@ -20,6 +21,8 @@ repositories {
 }
 
 dependencies {
+
+    implementation project(':vda2-api')
     // Netflix DGS
     implementation 'com.fasterxml.jackson.core:jackson-databind'
     implementation 'org.springframework.boot:spring-boot-starter-amqp'
@@ -28,8 +31,7 @@ dependencies {
     // Зависимости для контрактов API
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-validation'
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
     // Другие зависимости...
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

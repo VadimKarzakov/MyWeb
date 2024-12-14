@@ -1,11 +1,14 @@
 package com.example.vda2.controller;
 
-import com.example.vda2.api.controllers.OrderNotificationApi;
-import com.example.vda2.api.dto.OrderNotificationDto;
+
+import com.example.vda2api.controllers.OrderNotificationApi;
+import com.example.vda2api.dto.OrderNotificationDto;
+import com.example.vda2api.exception.ResourceNotFoundException;
+
+
 import com.example.vda2.model.OrderNotification;
 import com.example.vda2.service.OrderNotificationService;
 import com.example.vda2.service.MessageSenderService;
-import com.example.vda2.api.exception.ResourceNotFoundException;  // Импорт исключения
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
